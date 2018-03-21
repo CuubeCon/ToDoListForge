@@ -12,4 +12,9 @@ WIP
 ## Config Screen
 ![alt text](2018-03-21_19.07.40.png "config Screen")
 
+---
+
+## Mod Download [BETA]
+https://www.curseforge.com/minecraft/mc-mods/simple-todolist-overlay
+
 
