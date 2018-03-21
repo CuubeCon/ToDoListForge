@@ -1,5 +1,6 @@
 ﻿
 todolist.config.head=ToDoList Menü
+todolist.config.listHeadingText=Überschirft
 todolist.config.task1=Aufgabe 1
 todolist.config.task2=Aufgabe 2
 todolist.config.task3=Aufgabe 3
@@ -13,5 +14,3 @@ todolist.keybinding.checkTask1=Aufgabe 1 erledigt/unerledigt
 todolist.keybinding.checkTask2=Aufgabe 2 erledigt/unerledigt
 todolist.keybinding.checkTask3=Aufgabe 3 erledigt/unerledigt
 todolist.keybinding.checkTask4=Aufgabe 4 erledigt/unerledigt
-
-todolist.heading=Diese Folge

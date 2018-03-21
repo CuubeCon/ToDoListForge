@@ -15,8 +15,9 @@ import net.minecraft.client.resources.I18n;
  * @author CubeCon
  */
 public class GuiConfig extends GuiScreen {
-	public static String task1Text ="", task2Text="", task3Text="", task4Text="";
+	public static String headingText = "ToDoList", task1Text ="", task2Text="", task3Text="", task4Text="";
 
+	private GuiTextField listHeading;
 	private GuiTextField task1;
 	private GuiTextField task2;
 	private GuiTextField task3;
@@ -33,24 +34,27 @@ public class GuiConfig extends GuiScreen {
 	public void initGui()
 	{
 		super.initGui();
-		task1 = new GuiTextField(0, fontRenderer, width/2 - 100, height/2 - 62, 210, 20);
-		task2 = new GuiTextField(2, fontRenderer, width/2 - 100, height/2 - 37, 210, 20);
-		task3 = new GuiTextField(4, fontRenderer, width/2 - 100, height/2 - 12, 210, 20);
-		task4 = new GuiTextField(6, fontRenderer, width/2 - 100, height/2 + 13, 210, 20);
+		listHeading = new GuiTextField(0, fontRenderer, width/2 - 100, height/2 - 62, 210, 20);
+		task1       = new GuiTextField(1, fontRenderer, width/2 - 100, height/2 - 37, 210, 20);
+		task2       = new GuiTextField(3, fontRenderer, width/2 - 100, height/2 - 12, 210, 20);
+		task3       = new GuiTextField(5, fontRenderer, width/2 - 100, height/2 + 13, 210, 20);
+		task4       = new GuiTextField(7, fontRenderer, width/2 - 100, height/2 + 38, 210, 20);
 		/* Maxlength, so task needs max two lines */
+		listHeading.setMaxStringLength(10);
 		task1.setMaxStringLength(48);
 		task2.setMaxStringLength(48);
 		task3.setMaxStringLength(48);
 		task4.setMaxStringLength(48);
 		/* Set previous task text */
+		listHeading.setText(headingText);
 		task1.setText(task1Text);
 		task2.setText(task2Text);
 		task3.setText(task3Text);
 		task4.setText(task4Text);
-		emptyTask1 = new GuiButton(1, width/2 +115, height/2 - 62, 20, 20, "X");
-		emptyTask2 = new GuiButton(3, width/2 +115, height/2 - 37, 20, 20, "X");
-		emptyTask3 = new GuiButton(5, width/2 +115, height/2 - 12, 20, 20, "X");
-		emptyTask4 = new GuiButton(7, width/2 +115, height/2 + 13, 20, 20, "X");
+		emptyTask1 = new GuiButton(2, width/2 +115, height/2 - 37, 20, 20, "X");
+		emptyTask2 = new GuiButton(4, width/2 +115, height/2 - 12, 20, 20, "X");
+		emptyTask3 = new GuiButton(5, width/2 +115, height/2 + 13, 20, 20, "X");
+		emptyTask4 = new GuiButton(8, width/2 +115, height/2 + 38, 20, 20, "X");
 		/* if tasktext is empty, disable button to clear textfield */
 		if(task1Text == "")
 			emptyTask1.enabled = false;
@@ -60,8 +64,8 @@ public class GuiConfig extends GuiScreen {
 			emptyTask3.enabled = false;
 		if(task4Text == "")
 			emptyTask4.enabled = false;
-		cancel = new GuiButton(5, width/2 - 140, height/2 + 55 , 100,20 , I18n.format("todolist.config.cancel"));
-		finish = new GuiButton(6, width/2 + 35, height/2 + 55, 100, 20,I18n.format("todolist.config.finish"));
+		cancel = new GuiButton(9, width/2 - 140, height/2 + 80 , 100,20 , I18n.format("todolist.config.cancel"));
+		finish = new GuiButton(10, width/2 + 35, height/2 + 80, 100, 20,I18n.format("todolist.config.finish"));
 		buttonList.add(emptyTask1);
         buttonList.add(emptyTask2);
         buttonList.add(emptyTask3);
@@ -86,13 +90,15 @@ public class GuiConfig extends GuiScreen {
 		
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.head"), width/2 - 30, height/2 - 90, 0);
-        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task1"), width/2 - textPosX, height/2 - 55, 0);
+        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.listHeadingText"), width/2 - textPosX - 5, height/2 - 55, 0);
+        listHeading.drawTextBox();
+        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task1"), width/2 - textPosX, height/2 - 30, 0);
 		task1.drawTextBox();
-        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task2"), width/2 - textPosX, height/2 - 30, 0);
+        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task2"), width/2 - textPosX, height/2 -  5, 0);
 		task2.drawTextBox();
-        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task3"), width/2 - textPosX, height/2 - 5, 0);
+        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task3"), width/2 - textPosX, height/2 + 20, 0);
 		task3.drawTextBox();
-        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task4"), width/2 - textPosX, height/2 + 20, 0);
+        drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.task4"), width/2 - textPosX, height/2 + 45, 0);
 		task4.drawTextBox();
 	}
 
@@ -107,6 +113,7 @@ public class GuiConfig extends GuiScreen {
 	protected void keyTyped(char typedChar, int keyCode) throws IOException
 	{
 		super.keyTyped(typedChar, keyCode);
+		listHeading.textboxKeyTyped(typedChar, keyCode);
 		task1.textboxKeyTyped(typedChar, keyCode);
 		task2.textboxKeyTyped(typedChar, keyCode);
 		task3.textboxKeyTyped(typedChar, keyCode);
@@ -144,6 +151,7 @@ public class GuiConfig extends GuiScreen {
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
+		listHeading.mouseClicked(mouseX, mouseY, mouseButton);
 		task1.mouseClicked(mouseX, mouseY, mouseButton);
 		task2.mouseClicked(mouseX, mouseY, mouseButton);
 		task3.mouseClicked(mouseX, mouseY, mouseButton);
@@ -157,6 +165,7 @@ public class GuiConfig extends GuiScreen {
 	public void updateScreen()
 	{
         super.updateScreen();
+        listHeading.updateCursorCounter();
 		task1.updateCursorCounter();
 		task2.updateCursorCounter();
 		task3.updateCursorCounter();
@@ -176,10 +185,11 @@ public class GuiConfig extends GuiScreen {
         /* save texts and close Gui */
         if (button == finish)
         {
-            task1Text = task1.getText();
-            task2Text = task2.getText();
-            task3Text = task3.getText();
-            task4Text = task4.getText();
+            headingText = listHeading.getText();
+            task1Text   = task1.getText();
+            task2Text   = task2.getText();
+            task3Text   = task3.getText();
+            task4Text   = task4.getText();
             closeGui();
         }
         else if (button == cancel) /* close Gui without saving possible changes */

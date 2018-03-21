@@ -67,9 +67,7 @@ public class GuiToDoListOverlay extends Gui
 			GlStateManager.scale(5, 5, 5);
 			this.zLevel = 200.0f;
 			/* Draw heading and task texts */
-			String tmp;
-            tmp = I18n.format("todolist.heading");
-            fr.drawString(TextFormatting.ITALIC + tmp, currentImageWidth, (sr.getScaledHeight() - 60) / 5, 3);
+            fr.drawString(TextFormatting.ITALIC + GuiConfig.headingText, currentImageWidth, (sr.getScaledHeight() - 60) / 5, 3);
 			GlStateManager.popMatrix();
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(1, 1, 1);
