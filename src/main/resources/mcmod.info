@@ -1,9 +1,9 @@
 [{
   "modid": "todolist",
   "name": "ToDoList",
-  "description": "ToDoList",
+  "description": "Adds a simple ToDoList with up to four tasks. Simple ingame Config",
   "version": "1.0",
   "mcversion": "1.12.2",
   "authorList": ["CubeCon"],
-  "credits": "skate702"
+  "credits": "Inspired by the List German Minecraft Youtuber skate702 use(d) in his Let's Plays"
 }]
