@@ -81,10 +81,10 @@ public class GuiToDoListOverlay extends Gui
 			mc.getTextureManager().bindTexture(backgroundLocation);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			/* Draw StrokeLines when needed */
-			handleStrokeLine(strokeLineTask1, (sr.getScaledHeight() / 2) - 5);
-            handleStrokeLine(strokeLineTask2, (sr.getScaledHeight() / 2) + 21);
-            handleStrokeLine(strokeLineTask3, (sr.getScaledHeight() / 2) + 47);
-            handleStrokeLine(strokeLineTask4, (sr.getScaledHeight() / 2) + 73);
+			handleStrokeLine(strokeLineTask1, (sr.getScaledHeight() / 2) - 5, event.getPartialTicks());
+            handleStrokeLine(strokeLineTask2, (sr.getScaledHeight() / 2) + 21,event.getPartialTicks());
+            handleStrokeLine(strokeLineTask3, (sr.getScaledHeight() / 2) + 47,event.getPartialTicks());
+            handleStrokeLine(strokeLineTask4, (sr.getScaledHeight() / 2) + 73,event.getPartialTicks());
 
 			this.zLevel = 0.0f;
 			/* Gui is completed out of the screen */
@@ -101,7 +101,6 @@ public class GuiToDoListOverlay extends Gui
      *
      * @param event InputEvent
      */
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onKey(InputEvent event)
 	{
@@ -164,12 +163,12 @@ public class GuiToDoListOverlay extends Gui
      * @param strokeLine one of the four StrokeLines
      * @param posY int for the y-coordinate of the StrokeLine
      */
-	private void handleStrokeLine(StrokeLine strokeLine, int posY)
+	private void handleStrokeLine(StrokeLine strokeLine, int posY, float partialTicks)
     {
         /* StrokeLine appeare */
 		if (strokeLine.isShouldDraw() && strokeLine.getCurrentLength() <= strokeLine.getMaxLength())
 		{
-			strokeLine.setCurrentLength(strokeLine.getCurrentLength() + ((strokeLine.getMaxLength() / 100 < 1) ? 1 : strokeLine.getMaxLength() / 100)); // * partialTicks
+			strokeLine.setCurrentLength(strokeLine.getCurrentLength() + (((strokeLine.getMaxLength() / 100 < 1) ? 1 : strokeLine.getMaxLength() / 100) * (int) partialTicks + 1)); //
 			if(strokeLine.getMaxLength() > 120 && strokeLine.getCurrentLength() >= 120)
 			{
 				drawTexturedModalRect(currentImageWidth + 4, posY, 0, 254, 120, 2);
@@ -195,7 +194,7 @@ public class GuiToDoListOverlay extends Gui
 		}
 		else if (!strokeLine.isShouldDraw() && strokeLine.getCurrentLength() > 0) /* StrokeLine disappear */
 		{
-			strokeLine.setCurrentLength(strokeLine.getCurrentLength() - ((strokeLine.getMaxLength() / 100 < 1) ? 1 : strokeLine.getMaxLength() / 100)); // * partialTicks
+			strokeLine.setCurrentLength(strokeLine.getCurrentLength() - (((strokeLine.getMaxLength() / 100 < 1) ? 1 : strokeLine.getMaxLength() / 100)* (int) partialTicks + 1)); // * partialTicks
 			if(strokeLine.getMaxLength() > 120 && strokeLine.getCurrentLength() >= 120)
 			{
 				drawTexturedModalRect(currentImageWidth + 4, posY, 0, 254, 120, 2);
