@@ -17,4 +17,7 @@ WIP
 ## Mod Download [BETA]
 https://www.curseforge.com/minecraft/mc-mods/simple-todolist-overlay
 
+### License
+Attribution-NonCommercial 3.0 Unported
+
 
