@@ -1,5 +1,5 @@
 # ToDoList - Minecraft Forge Mod
-Minecraft Forge Mod adds a simple ToDoList with up to four tasks. Simple ingame config.
+A Minecraft Forge Mod witch adds a simple ingame ToDoList with up to four tasks. Easy and fast ingame config.
 Got the idea from skate702, a German Minecraft Lets player, who uses such a list in his videos.
 
 WIP
