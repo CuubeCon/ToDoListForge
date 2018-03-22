@@ -15,13 +15,12 @@ import org.lwjgl.input.Keyboard;
  *
  * @author CubeCon
  */
-@Mod(modid = ToDoList.MODID, name = ToDoList.NAME, version = ToDoList.VERSION, clientSideOnly = true)
+@Mod(modid = ToDoList.MODID, name = ToDoList.NAME, version = ToDoList.VERSION, clientSideOnly = true, acceptedMinecraftVersions = "[1.12, 1.12.2]" )
 public class ToDoList
 {
-	
 	public static final String MODID       = "todolist";
 	public static final String NAME        = "ToDoList";
-	public static final String VERSION     = "1.0";
+	public static final String VERSION     = "1.0.1";
 
 	public static KeyBinding showHideKey   =  new KeyBinding(I18n.format("todolist.keybinding.showHide"), Keyboard.KEY_P, "ToDoList");
 	public static KeyBinding configKey     =  new KeyBinding(I18n.format("todolist.keybinding.config"), Keyboard.KEY_U, "ToDoList");

@@ -14,7 +14,8 @@ import net.minecraft.client.resources.I18n;
  *
  * @author CubeCon
  */
-public class GuiConfig extends GuiScreen {
+public class GuiConfig extends GuiScreen
+{
 	public static String headingText = "ToDoList", task1Text ="", task2Text="", task3Text="", task4Text="";
 
 	private GuiTextField listHeading;
@@ -56,13 +57,13 @@ public class GuiConfig extends GuiScreen {
 		emptyTask3 = new GuiButton(5, width/2 +115, height/2 + 13, 20, 20, "X");
 		emptyTask4 = new GuiButton(8, width/2 +115, height/2 + 38, 20, 20, "X");
 		/* if tasktext is empty, disable button to clear textfield */
-		if(task1Text == "")
+		if(task1Text.equals(""))
 			emptyTask1.enabled = false;
-		if(task2Text == "")
+		if(task2Text.equals(""))
 			emptyTask2.enabled = false;
-		if(task3Text == "")
+		if(task3Text.equals(""))
 			emptyTask3.enabled = false;
-		if(task4Text == "")
+		if(task4Text.equals(""))
 			emptyTask4.enabled = false;
 		cancel = new GuiButton(9, width/2 - 140, height/2 + 80 , 100,20 , I18n.format("todolist.config.cancel"));
 		finish = new GuiButton(10, width/2 + 35, height/2 + 80, 100, 20,I18n.format("todolist.config.finish"));
@@ -223,7 +224,7 @@ public class GuiConfig extends GuiScreen {
      */
     private void closeGui()
     {
-        this.mc.displayGuiScreen((GuiScreen)null);
+        this.mc.displayGuiScreen(null);
 
         if (this.mc.currentScreen == null)
         {
