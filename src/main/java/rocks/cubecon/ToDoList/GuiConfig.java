@@ -6,7 +6,6 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 import rocks.cubecon.ToDoList.util.CustomTextField;
@@ -20,11 +19,11 @@ public class GuiConfig extends GuiScreen
 {
 	public static String headingText = "ToDoList", task1Text ="", task2Text="", task3Text="", task4Text="";
 
-	private GuiTextField listHeading;
-	private GuiTextField task1;
-	private GuiTextField task2;
-	private GuiTextField task3;
-	private GuiTextField task4;
+	private CustomTextField listHeading;
+	private CustomTextField task1;
+	private CustomTextField task2;
+	private CustomTextField task3;
+	private CustomTextField task4;
 	private GuiButton emptyTask1, emptyTask2, emptyTask3, emptyTask4, finish,cancel;
 	private int textPosX;
 
