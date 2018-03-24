@@ -2,7 +2,7 @@
   "modid": "todolist",
   "name": "ToDoList",
   "description": "Adds a simple ToDoList Overlay with up to four tasks. Eazy and fast ingame Config",
-  "version": "1.0.1.0",
+  "version": "1.0.2.0",
   "mcversion": "1.12 - 1.12.2",
   "authorList": ["CubeCon"],
   "credits": "Inspired by the List German Minecraft Youtuber skate702 used in his Let's Plays"

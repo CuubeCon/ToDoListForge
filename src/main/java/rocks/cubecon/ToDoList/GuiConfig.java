@@ -8,6 +8,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import org.lwjgl.input.Keyboard;
+import rocks.cubecon.ToDoList.util.CustomTextField;
 
 /**
  * GuiScreen where you can write the Tasks
@@ -34,14 +36,15 @@ public class GuiConfig extends GuiScreen
 	@Override
 	public void initGui()
 	{
+        Keyboard.enableRepeatEvents(true);
 		super.initGui();
-		listHeading = new GuiTextField(0, fontRenderer, width/2 - 100, height/2 - 62, 210, 20);
-		task1       = new GuiTextField(1, fontRenderer, width/2 - 100, height/2 - 37, 210, 20);
-		task2       = new GuiTextField(3, fontRenderer, width/2 - 100, height/2 - 12, 210, 20);
-		task3       = new GuiTextField(5, fontRenderer, width/2 - 100, height/2 + 13, 210, 20);
-		task4       = new GuiTextField(7, fontRenderer, width/2 - 100, height/2 + 38, 210, 20);
+		listHeading = new CustomTextField(0, fontRenderer, width/2 - 100, height/2 - 62, 210, 20, 60);
+		task1       = new CustomTextField(1, fontRenderer, width/2 - 100, height/2 - 37, 210, 20, 240);
+		task2       = new CustomTextField(3, fontRenderer, width/2 - 100, height/2 - 12, 210, 20, 240);
+		task3       = new CustomTextField(5, fontRenderer, width/2 - 100, height/2 + 13, 210, 20, 240);
+		task4       = new CustomTextField(7, fontRenderer, width/2 - 100, height/2 + 38, 210, 20, 240);
 		/* Maxlength, so task needs max two lines */
-		listHeading.setMaxStringLength(10);
+		listHeading.setMaxStringLength(12);
 		task1.setMaxStringLength(48);
 		task2.setMaxStringLength(48);
 		task3.setMaxStringLength(48);
@@ -65,8 +68,8 @@ public class GuiConfig extends GuiScreen
 			emptyTask3.enabled = false;
 		if(task4Text.equals(""))
 			emptyTask4.enabled = false;
-		cancel = new GuiButton(9, width/2 - 140, height/2 + 80 , 100,20 , I18n.format("todolist.config.cancel"));
-		finish = new GuiButton(10, width/2 + 35, height/2 + 80, 100, 20,I18n.format("todolist.config.finish"));
+		cancel = new GuiButton(9, width/2 - 140, height/2 + 80 , 100,20, I18n.format("todolist.config.cancel"));
+		finish = new GuiButton(10, width/2 + 35, height/2 + 80, 100, 20, I18n.format("todolist.config.finish"));
 		buttonList.add(emptyTask1);
         buttonList.add(emptyTask2);
         buttonList.add(emptyTask3);
@@ -80,15 +83,14 @@ public class GuiConfig extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      *
-     * @param mouseX int
-     * @param mouseY int
-     * @param partialTicks float
+     * @param mouseX mouse x position
+     * @param mouseY mouse y position
+     * @param partialTicks the partial ticks
      */
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		drawDefaultBackground();
-		
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.head"), width/2 - 30, height/2 - 90, 0);
         drawString(fontRenderer, ChatFormatting.WHITE + I18n.format("todolist.config.listHeadingText"), width/2 - textPosX - 5, height/2 - 55, 0);
@@ -106,9 +108,9 @@ public class GuiConfig extends GuiScreen
     /**
      * Handles the KeyboardInput and enable/disable emptyTasks button when text is empty or not
      *
-     * @param typedChar char
-     * @param keyCode int
-     * @throws IOException
+     * @param typedChar the typed char
+     * @param keyCode the keycode from the typed char
+     * @throws IOException java exception
      */
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException
@@ -119,6 +121,7 @@ public class GuiConfig extends GuiScreen
 		task2.textboxKeyTyped(typedChar, keyCode);
 		task3.textboxKeyTyped(typedChar, keyCode);
 		task4.textboxKeyTyped(typedChar, keyCode);
+
 		if((task1.getText().isEmpty()) && emptyTask1.enabled)
 			emptyTask1.enabled = false;
 		else if(!task1.getText().isEmpty() && !emptyTask1.enabled)
@@ -143,10 +146,10 @@ public class GuiConfig extends GuiScreen
     /**
      *  Called when the mouse is clicked
      *
-     * @param mouseX int
-     * @param mouseY int
-     * @param mouseButton int
-     * @throws IOException
+     * @param mouseX mouse x postition
+     * @param mouseY mouse y position
+     * @param mouseButton mousebutton pressed as int
+     * @throws IOException java exception
      */
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
@@ -176,8 +179,8 @@ public class GuiConfig extends GuiScreen
     /**
      * Method for actions when clicked a GuiButton
      *
-     * @param button GuiButton
-     * @throws IOException
+     * @param button the clicked GuiButton
+     * @throws IOException java exception
      */
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException
